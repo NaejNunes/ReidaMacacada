@@ -28,8 +28,7 @@ function preload()
 	game.load.image('blocks', 'assets/plataforma.png');
 	game.load.image('bananas', 'assets/banana.png');
 	game.load.image('background', 'assets/sky.png');
-	game.load.image('MK', 'assets/reidabanana.png');
-	game.load.spritesheet('spr_playerMarrom', 'assets/playerMarrom.png',60, 50);
+	game.load.spritesheet('spr_playerMarrom', 'assets/Player.png',59, 64);
 	game.load.spritesheet('spr_player2', 'assets/macaco32p2.png',28.7, 30);
 	game.load.audio('tema_mp3', 'assets/Sons/tema.mp3');
 	game.load.audio('Banana_mp3', 'assets/Sons/PegaBanana.mp3');
@@ -38,19 +37,15 @@ function create()
 {
 	background = game.add.tileSprite(0, 0, 800, 600, 'background');
 	
-	game.add.sprite(0,0, 'MK');
 	//estancia o tema mp3 do jogo.
 	Tema_mp3 = game.sound.play('tema_mp3');
 	Tema_mp3.play();
 	
 	//habilita a fisíca do jogo
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-			
-	//Adiciona o sprite de background do jogo
-	//game.add.sprite(0, 0, 'sky');
-			
-	pontuacaotxt = game.add.text(10,10, 'Bananas: 0',{'fontSize': '14px', 'fill': '#8B4513'});
-	pontuacaotxt2 = game.add.text(300,10, 'Bananas: 0',{'fontSize': '14px', 'fill': '#696969'});
+					
+	pontuacaotxt = game.add.text(10,10, 'Bananas: 0',{'fontSize': '22px', 'fill': '#8B4513'});
+	pontuacaotxt2 = game.add.text(650,10, 'Bananas: 0',{'fontSize': '22px', 'fill': '#696969'});
 
 	//Cria um grupo para trabalhar com o chão do jogo
 	platforms = game.add.group();
@@ -93,17 +88,17 @@ function create()
 	game.physics.arcade.enable(player);
 		
 	//Ajusta como o player irá quicar quando cair
-	player.body.bounce.y = 0.1;
+	player.body.bounce.y = 0.0;
 		
 	//Ajusta a gravidade do player
-	player.body.gravity.y = 600;
+	player.body.gravity.y = 1000;
 		
 	//Cria limites para o player não ultrapassar as laterais do jogo
 	player.body.collideWorldBounds = true;
 		
 	//Cria a animação do player para a direita e esquerda
-	player.animations.add('left', [1, 2, 3, 4, 5, 6, 7, 8], 8, true);
-	player.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 8, true);
+	player.animations.add('left', [7, 6, 5, 4, 3, 2, 1, 0], 12, true);
+	player.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 16, true);
 			
 	//Player 2
 	player2 = game.add.sprite(10, game.world.height - 90, 'spr_player2');
@@ -135,32 +130,32 @@ function update()
 	
 		
 	//ajusta a velocidade inical do player
-	player.body.velocity.x = 2;
-	player2.body.velocity.x = 1;
+	player.body.velocity.x = 0;
+	player2.body.velocity.x = 0;
 			
 	if(cursors.left.isDown)
 	{
 		//verifica se a tleca para a esquerda foi pressionada
-		player.body.velocity.x = -150;
+		player.body.velocity.x = -300;
 		player.animations.play('left');
 	}
 	else if(cursors.right.isDown)
 	{
 		//verifica se a tecla da direita foi pressionada
-		player.body.velocity.x = 150;
+		player.body.velocity.x = 300;
 		player.animations.play('right');
 	}
 	else
 	{
 		//Verifica se o player está parado
 		player.animations.stop();
-		player.frame =0;
+		player.frame =8;
 	}
 				
 	if(cursors.up.isDown && player.body.touching.down && hitPlatform)
 	{
 		//verifica se o player esta em contato com o chão e ajusta o pulo
-		player.body.velocity.y = -350;	
+		player.body.velocity.y = -450;	
 	}	
 			
 	//Player2
