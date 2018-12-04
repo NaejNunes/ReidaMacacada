@@ -25,11 +25,11 @@ var background;
 function preload()
 {
 	game.load.image('ground', 'assets/platform.png');
-	game.load.image('blocks', 'assets/plataforma1.png');
+	game.load.image('blocks', 'assets/plataforma.png');
 	game.load.image('bananas', 'assets/banana.png');
 	game.load.image('background', 'assets/sky.png');
 	game.load.image('MK', 'assets/reidabanana.png');
-	game.load.spritesheet('spr_player', 'assets/player.png',28.7, 30);
+	game.load.spritesheet('spr_playerMarrom', 'assets/playerMarrom.png',60, 50);
 	game.load.spritesheet('spr_player2', 'assets/macaco32p2.png',28.7, 30);
 	game.load.audio('tema_mp3', 'assets/Sons/tema.mp3');
 	game.load.audio('Banana_mp3', 'assets/Sons/PegaBanana.mp3');
@@ -68,26 +68,26 @@ function create()
 	ground.body.immovable = true;
 	
 	//Estancia o sprite 		
-	var ledge = platforms.create(40, 160, 'blocks');
+	var ledge = platforms.create(550, 360, 'blocks');
 	ledge.body.immovable = true;
 			
-	ledge = platforms.create(290, 160, 'blocks');
+	ledge = platforms.create(315, 450, 'blocks');
 	ledge.body.immovable = true;
 			
-	ledge = platforms.create(160, 200, 'blocks');
+	ledge = platforms.create(60, 360, 'blocks');
 	ledge.body.immovable = true;
 			
-	ledge = platforms.create(160, 120, 'blocks');
+	ledge = platforms.create(315, 270, 'blocks');
 	ledge.body.immovable = true;
 			
-	ledge = platforms.create(40, 80, 'blocks');
+	ledge = platforms.create(60, 175, 'blocks');
 	ledge.body.immovable = true;
 			
-	ledge = platforms.create(290, 80, 'blocks');
+	ledge = platforms.create(550, 175, 'blocks');
 	ledge.body.immovable = true;
 			
 	//adiciona o sprite do player e ajusta a altura inicial do player
-	player = game.add.sprite(600, game.world.height - 90, 'spr_player');
+	player = game.add.sprite(600, game.world.height - 150, 'spr_playerMarrom');
 		
 	//Habilita a fisíca do player
 	game.physics.arcade.enable(player);
@@ -96,14 +96,14 @@ function create()
 	player.body.bounce.y = 0.1;
 		
 	//Ajusta a gravidade do player
-	player.body.gravity.y = 1100;
+	player.body.gravity.y = 600;
 		
 	//Cria limites para o player não ultrapassar as laterais do jogo
 	player.body.collideWorldBounds = true;
 		
 	//Cria a animação do player para a direita e esquerda
-	player.animations.add('left', [0, 1, 2, 3, 4], 12, true);
-	player.animations.add('right', [5, 6, 7, 8, 9], 12, true);
+	player.animations.add('left', [1, 2, 3, 4, 5, 6, 7, 8], 8, true);
+	player.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 8, true);
 			
 	//Player 2
 	player2 = game.add.sprite(10, game.world.height - 90, 'spr_player2');
@@ -135,8 +135,8 @@ function update()
 	
 		
 	//ajusta a velocidade inical do player
-	player.body.velocity.x = 0;
-	player2.body.velocity.x = 0;
+	player.body.velocity.x = 2;
+	player2.body.velocity.x = 1;
 			
 	if(cursors.left.isDown)
 	{
@@ -154,7 +154,7 @@ function update()
 	{
 		//Verifica se o player está parado
 		player.animations.stop();
-		player.frame =4;
+		player.frame =0;
 	}
 				
 	if(cursors.up.isDown && player.body.touching.down && hitPlatform)
