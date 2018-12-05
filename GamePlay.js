@@ -19,24 +19,27 @@ var pontuacaotxt;
 var pontuacaotxt2;
 var Tema_mp3;
 var Bamana_mp3;
-var background;		
+var background;	
+var Nuvem;	
 
 // Função que faz o pre carregamento dos sprites
 function preload()
 {
-	game.load.image('ground', 'assets/platform.png');
+	game.load.image('ground', 'assets/chao.png');
+	game.load.image('spr_nuvem', 'assets/Nuvem.png');
 	game.load.image('blocks', 'assets/plataforma.png');
-	game.load.image('bananas', 'assets/banana.png');
+	game.load.image('bananas', 'assets/Banana.png');
 	game.load.image('background', 'assets/sky.png');
-	game.load.spritesheet('spr_playerMarrom', 'assets/Player.png',59, 64);
-	game.load.spritesheet('spr_player2', 'assets/macaco32p2.png',28.7, 30);
+	game.load.spritesheet('spr_playerMarrom', 'assets/PlayerMarrom.png',56.6, 53);
+	game.load.spritesheet('spr_playerBranco', 'assets/PlayerBranco.png',56.6, 53);
 	game.load.audio('tema_mp3', 'assets/Sons/tema.mp3');
 	game.load.audio('Banana_mp3', 'assets/Sons/PegaBanana.mp3');
 }
 function create()
 {
+	//Instancia o background em cena
 	background = game.add.tileSprite(0, 0, 800, 600, 'background');
-	
+
 	//estancia o tema mp3 do jogo.
 	Tema_mp3 = game.sound.play('tema_mp3');
 	Tema_mp3.play();
@@ -57,7 +60,7 @@ function create()
 	var ground = platforms.create(0, game.world.height - 64, 'ground');
 		
 	//cria a escala do chão no jogo
-	ground.scale.setTo(2, 2);
+	ground.scale.setTo(1, 1);
 		
 	//Torna o corpo dochão imóvel
 	ground.body.immovable = true;
@@ -82,7 +85,7 @@ function create()
 	ledge.body.immovable = true;
 			
 	//adiciona o sprite do player e ajusta a altura inicial do player
-	player = game.add.sprite(600, game.world.height - 150, 'spr_playerMarrom');
+	player = game.add.sprite(730, game.world.height - 150, 'spr_playerMarrom');
 		
 	//Habilita a fisíca do player
 	game.physics.arcade.enable(player);
@@ -97,19 +100,19 @@ function create()
 	player.body.collideWorldBounds = true;
 		
 	//Cria a animação do player para a direita e esquerda
-	player.animations.add('left', [7, 6, 5, 4, 3, 2, 1, 0], 12, true);
-	player.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 16, true);
+	player.animations.add('left', [7, 6, 5, 4, 3, 2, 1, 0], 22, true);
+	player.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 22, true);
 			
 	//Player 2
-	player2 = game.add.sprite(10, game.world.height - 90, 'spr_player2');
+	player2 = game.add.sprite(13, game.world.height - 150, 'spr_playerBranco');
 	game.physics.arcade.enable(player2);
-	player2.body.bounce.y = 0.1;
-	player2.body.gravity.y = 1100;
+	player2.body.bounce.y = 0.0;
+	player2.body.gravity.y = 1000;
 	player2.body.collideWorldBounds = true;
 		
 			
-	player2.animations.add('left', [0, 1, 2, 3, 4], 12, true);
-	player2.animations.add('right', [5, 6, 7, 8, 9], 12, true);
+	player2.animations.add('left', [7, 6, 5, 4, 3, 2, 1, 0], 22, true);
+	player2.animations.add('right', [9, 10, 11, 12, 13, 14, 15, 16], 22, true);
 		
 	//Captura o teclado para a movimentação do player
 	cursors = game.input.keyboard.createCursorKeys();
@@ -119,20 +122,15 @@ function create()
 						
 function update()
 {
-	
-	
-	
 	//Cria a varial que detecta a colisão entre o player e o chão
 	var hitPlatform = game.physics.arcade.collide(player, platforms);			
 	game.physics.arcade.collide(itemBanana, platforms);		
 	game.physics.arcade.overlap(player, itemBanana, coleta2, null, this);				
 					
-	
-		
 	//ajusta a velocidade inical do player
 	player.body.velocity.x = 0;
 	player2.body.velocity.x = 0;
-			
+				
 	if(cursors.left.isDown)
 	{
 		//verifica se a tleca para a esquerda foi pressionada
@@ -149,7 +147,7 @@ function update()
 	{
 		//Verifica se o player está parado
 		player.animations.stop();
-		player.frame =8;
+		player.frame =7;
 	}
 				
 	if(cursors.up.isDown && player.body.touching.down && hitPlatform)
@@ -169,23 +167,23 @@ function update()
 			
 	if(leftKey.isDown)
 	{
-		player2.body.velocity.x = -150;
+		player2.body.velocity.x = -300;
 		player2.animations.play('left');
 	}
 	else if(rightKey.isDown)
 	{
-		player2.body.velocity.x = 150;
+		player2.body.velocity.x = 300;
 		player2.animations.play('right');
 	}
 	else
 	{
 		player2.animations.stop();
-		player2.frame = 5;
+		player2.frame = 8;
 	}
 				
 	if(upKey.isDown && player2.body.touching.down && hitPlatform2)
 	{
-		player2.body.velocity.y = -350;	
+		player2.body.velocity.y = -450;	
 	}
 	if(pontuacao == 15)
 	{
@@ -196,8 +194,6 @@ function update()
 		window.location.replace("fimjogop1.html");	
 	}
 }
-
-
 function coleta(player, itemBanana)
 {
 	pontuacao += 1;
@@ -236,33 +232,40 @@ function spawnaBanana()
 	{
 		case 0:
 			//instacia a banana
-			var banana1 = itemBanana.create(60, 40, 'bananas');
+			var banana1 = itemBanana.create(120, 30, 'bananas');
 			banana1.body.gravity.y = 300;
 			break;
-					
+			
+				
 		case 1:
-			var banana2 = itemBanana.create(180,50, 'bananas');
+			var banana2 = itemBanana.create(370,40, 'bananas');
 			banana2.body.gravity.y = 300;
 			break;
+		
 							
 		case 2:
-			var banana3 = itemBanana.create(310, 40, 'bananas');
+			var banana3 = itemBanana.create(600, 30, 'bananas');
 			banana3.body.gravity.y = 300;
 			break;
+		
 						
 		case 3:
-			var banana4 = itemBanana.create(60, 100, 'bananas');
+			var banana4 = itemBanana.create(120, 200, 'bananas');
 			banana4.body.gravity.y = 300;
 			break;
-						
+		
+					
 		case 4:
-			var banana5 = itemBanana.create(180, 140, 'bananas');
+			var banana5 = itemBanana.create(370, 300, 'bananas');
 			banana5.body.gravity.y = 300;
 			break;
-				
+			
+					
 		case 5:
-			var banana6 = itemBanana.create(310, 100, 'bananas');
+			var banana6 = itemBanana.create(600, 200, 'bananas');
 			banana6.body.gravity.y = 300;
 			break;
+			
 	}	
+	
 }	

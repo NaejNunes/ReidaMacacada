@@ -1,6 +1,6 @@
 var game = new Phaser.Game(
 
-	400, 300, Phaser.AUTO, '',
+	800, 600, Phaser.AUTO, '',
 	{
 		preload: preload,
 		create: create,
@@ -9,7 +9,7 @@ var game = new Phaser.Game(
 );
 function preload()
 {
-	game.load.spritesheet('ButtonPlay', 'assets/AnimButton.png', 62, 60);
+	game.load.spritesheet('ButtonPlay', 'assets/AnimButton.png',220, 210);
 	game.load.image('background', 'assets/background.png');
 }
 
@@ -18,9 +18,9 @@ var background;
 	
 function create()
 {
-	background = game.add.tileSprite(0, 0, 400, 300, 'background');
+	background = game.add.tileSprite(0, 0, 800, 600, 'background');
 	
-	button = game.add.button(game.world.centerX -30, 130, 'ButtonPlay', actionOnClick, this, 0, 1, 2);
+	button = game.add.button(game.world.centerX -120, 200, 'ButtonPlay', actionOnClick, this, 1, 2, 0);
 	
 	button.onInputOver.add(over, this);
 	button.onInputOut.add(out, this);
