@@ -1,6 +1,6 @@
 var game = new Phaser.Game(
 
-	400, 300, Phaser.AUTO, '',
+	800, 600, Phaser.AUTO, '',
 	{
 		preload: preload,
 		create: create,
@@ -18,7 +18,7 @@ var background;
 	
 function create()
 {
-	background = game.add.tileSprite(0, 0, 400, 300, 'background');
+	background = game.add.tileSprite(0, 0, 800, 600, 'background');
 	
 	button = game.add.button(310, 240, 'ButtonPlay', actionOnClick, this, 0, 1, 2);
 	
