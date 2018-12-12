@@ -29,7 +29,7 @@ function preload()
 	game.load.image('spr_nuvem', 'assets/Nuvem.png');
 	game.load.image('blocks', 'assets/plataforma.png');
 	game.load.image('bananas', 'assets/Banana.png');
-	game.load.image('background', 'assets/sky.png');
+	game.load.image('background', 'assets/backgrounsmenu1.png');
 	game.load.spritesheet('spr_playerMarrom', 'assets/PlayerMarrom.png',56.6, 53);
 	game.load.spritesheet('spr_playerBranco', 'assets/PlayerBranco.png',56.6, 53);
 	game.load.audio('tema_mp3', 'assets/Sons/tema.mp3');
