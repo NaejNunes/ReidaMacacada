@@ -25,14 +25,14 @@ var Nuvem;
 // Função que faz o pre carregamento dos sprites
 function preload()
 {
-	game.load.image('ground', 'assets/chao.png');
+	game.load.image('ground', 'assets/chaofase2.png');
 	game.load.image('spr_nuvem', 'assets/Nuvem.png');
 	game.load.image('blocks', 'assets/plataformaAgua.png');
 	game.load.image('blocks2', 'assets/plataformaAgua2.png');
 	game.load.image('bananas', 'assets/Banana.png');
 	game.load.image('background', 'assets/backgroundagua.png');
-	game.load.spritesheet('spr_playerMarrom', 'assets/PlayerMarrom.png',56.6, 53);
-	game.load.spritesheet('spr_playerBranco', 'assets/PlayerBranco.png',56.6, 53);
+	game.load.spritesheet('spr_playerMarrom', 'assets/PlayerAnimNadando2.png',56.6, 53);
+	game.load.spritesheet('spr_playerBranco', 'assets/PlayerAnimNadando.png',56.6, 53);
 	game.load.audio('tema_mp3', 'assets/Sons/tema.mp3');
 	game.load.audio('Banana_mp3', 'assets/Sons/PegaBanana.mp3');
 }
